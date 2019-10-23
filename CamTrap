@@ -1,0 +1,62 @@
+#Make a Record Table
+wd_images_ID <- system.file("/Users/danielcollins/Documents/Pictures", package = "camtrapR")
+
+rec.db1 <- recordTable(inDir = "/Users/danielcollins/Documents/Pictures", IDfrom = "directory", 
+                       minDeltaTime = 0, writecsv = FALSE, timeZone = "UTC", removeDuplicateRecords = FALSE)
+
+#Use rec.db2 if you have more than one species (directory)
+#To view the data.frame
+data.frame(rec.db1)
+
+#Rename the data.frame
+mydata <- data.frame(rec.db1)
+
+#Create histogram
+activityHistogram(recordTable = mydata, species = species4activity, allSpecies = FALSE)
+
+#Create density plot
+species4activity <- "Coyotes"
+
+activityHistogram(recordTable = mydata, species = species4activity, allSpecies = FALSE)
+
+species4activity <- "Coyotes"
+
+activityDensity(recordTable = mydata, allSpecies = TRUE, writePNG = FALSE, plotR = TRUE, add.rug = TRUE)
+
+#Create radial plots
+species4activity <- "Coyotes"
+
+activityRadial(recordTable       = mydata,
+                               species           = species4activity,
+                                allSpecies        = FALSE,
+                               speciesCol        = "Species",
+                               recordDateTimeCol = "DateTimeOriginal",
+                               plotR             = TRUE,
+                               writePNG          = FALSE,
+                              lwd               = 5
+                  )
+
+#plot type = polygon
+activityRadial(recordTable       = mydata,
+                               species           = species4activity,
+                               allSpecies        = FALSE,
+                               speciesCol        = "Species",
+                               recordDateTimeCol = "DateTimeOriginal",
+                               plotR             = TRUE,
+                               writePNG          = FALSE,
+                               lwd               = 5,
+                               rp.type           = "p"      
+                )
+
+
+
+                     
+                
+
+
+
+
+
+
+
+
