@@ -1,0 +1,101 @@
+#Make a Record Table
+wd_images_ID <- system.file("/Users/danielcollins/Documents/Pictures", 
+                            package = "camtrapR")
+
+rec.db1 <- recordTable(inDir = "/Users/danielcollins/Documents/Pictures", 
+                       IDfrom = "directory", minDeltaTime = 0, writecsv = FALSE, 
+                       timeZone = "UTC", removeDuplicateRecords = FALSE)
+
+
+
+#Use rec.db2 if you have more than one species (directory)
+#To view the data.frame
+data.frame(rec.db1)
+
+#Rename the data.frame
+mydata <- data.frame(rec.db1)
+
+#Create histogram
+activityHistogram(recordTable = mydata, species = species4activity, allSpecies = FALSE)
+
+#Create density plots
+species4activity <- "coyotes"
+
+activityDensity(recordTable = mydata, allSpecies = TRUE, writePNG = FALSE, plotR = TRUE, add.rug = TRUE)
+
+#Create radial plots
+species4activity <- "Coyotes"
+
+activityRadial(recordTable       = mydata,
+               species           = species4activity,
+               allSpecies        = FALSE,
+               speciesCol        = "Species",
+               recordDateTimeCol = "DateTimeOriginal",
+               plotR             = TRUE,
+               writePNG          = FALSE,
+               lwd               = 5
+)
+
+#plot type = polygon
+activityRadial(recordTable       = mydata,
+               species           = species4activity,
+               allSpecies        = FALSE,
+               speciesCol        = "Species",
+               recordDateTimeCol = "DateTimeOriginal",
+               plotR             = TRUE,
+               writePNG          = FALSE,
+               lwd               = 5,
+               rp.type           = "p"      
+)
+
+
+#Overlap animal activity
+speciesA_for_activity <- "Coyotes"
+speciesB_for_activity <- "Gray Fox"
+
+activityOverlap(recordTable = mydata, speciesA = speciesA_for_activity, 
+                speciesB = speciesB_for_activity, writePNG = FALSE, 
+                plotR = TRUE, createDir = FALSE, pngMaxPix = 1000, 
+                linecol = c("red", "blue"), linewidth = c(3,3), 
+                add.rug = TRUE)
+
+
+#How to make Detection maps
+#Import csv file into R and turn csv file into data frame
+data.frame(CamTraps2017)
+
+#Give the new data frame a name
+mydata2 <- data.frame(CamTraps2017)
+
+#Create detection maps
+Mapstest2 <- detectionMaps(CTtable           = mydata2,
+                          recordTable       = mydata,
+                          Xcol              = "utm_x",
+                          Ycol              = "utm_y",
+                          stationCol        = "Station",
+                         speciesCol        = "Species",
+                         writePNG          = FALSE,
+                         plotR             = TRUE,
+                         printLabels       = TRUE,
+                         richnessPlot      = TRUE,
+                          addLegend         = TRUE)
+
+#Or you can remove the station labels if they are too crowded
+Mapstest2 <- detectionMaps(CTtable           = mydata2,
+                           recordTable       = mydata,
+                           Xcol              = "utm_x",
+                           Ycol              = "utm_y",
+                           stationCol        = "Station",
+                           speciesCol        = "Species",
+                           writePNG          = FALSE,
+                           plotR             = TRUE,
+                           printLabels       = FALSE,
+                           richnessPlot      = TRUE,
+                          addLegend         = TRUE)
+                      
+
+                           
+                           
+
+
+
