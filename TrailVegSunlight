@@ -1,0 +1,34 @@
+#Statistical transformations/Bar charts
+library(ggplot2)
+
+#Working with real data from Bio140 trail vegetation
+#Set working directory
+setwd("/Users/danielcollins/Desktop/R script for TrailVegetation")
+
+#Rename the csv file that was uploaded from Camelot as mydata
+mydata <- read.csv("TrailVegetation_Sunlight.csv")
+
+#Make bar plot that is stacked
+ggplot(data = mydata, aes(x = Depth, y = Species, fill = Sunlight)) + geom_col()
+
+#Flip the x axis and y axis so that the names of behavior can be seen clearly
+ggplot(data = mydata, aes(x = Depth, y = Species, fill = Sunlight)) + geom_col() + coord_flip()           
+
+#Reorder the chunks so that they represent the logical order of stage progression
+mydata$Sunlight <- factor(mydata$Sunlight, levels = c("High", "Medium", "Low"))
+
+#Re-plot the chart under the newly assigned order by changing the 'fill' command
+ggplot(data = mydata, aes(x = Depth, y = Species, fill = factor(Sunlight))) + geom_col() + coord_flip()           
+
+#Change the color palette so that it is easier to read
+ggplot(data = mydata, aes(x = Depth, y = Species, fill = factor(Sunlight))) + geom_col() + coord_flip() + scale_fill_brewer(palette = 15)          
+
+#Change the labels of the plot
+ggplot(data = mydata, aes(x = Depth, y = Species, fill = factor(Sunlight))) + geom_col() + coord_flip() + scale_fill_brewer(palette = 15) + labs(title = "Figure 1 Total Plant Species Found at Different Depths and Light", y = "Species", x = "Depth (m)", fill = "Sunlight Intensity")
+
+
+
+
+
+
+
