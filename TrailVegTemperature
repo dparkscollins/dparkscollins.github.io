@@ -3,7 +3,7 @@ library(ggplot2)
 
 #Working with real data from Bio140 trail vegetation
 #Set working directory
-setwd("/Users/danielcollins/Desktop/R script for TrailVegetation")
+setwd("/Users/")
 
 #Rename the csv file that was uploaded from Camelot as mydata
 mydata <- read.csv("TrailVegetation_Temperature.csv")
