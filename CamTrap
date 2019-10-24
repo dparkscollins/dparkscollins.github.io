@@ -1,7 +1,7 @@
 #Make a Record Table
-wd_images_ID <- system.file("/Users/danielcollins/Documents/Pictures", package = "camtrapR")
+wd_images_ID <- system.file("/Users/", package = "camtrapR")
 
-rec.db1 <- recordTable(inDir = "/Users/danielcollins/Documents/Pictures", IDfrom = "directory", 
+rec.db1 <- recordTable(inDir = "/Users/", IDfrom = "directory", 
                        minDeltaTime = 0, writecsv = FALSE, timeZone = "UTC", removeDuplicateRecords = FALSE)
 
 #Use rec.db2 if you have more than one species (directory)
